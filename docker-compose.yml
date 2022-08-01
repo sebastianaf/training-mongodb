@@ -14,7 +14,7 @@ services:
 #    ports:
 #      - 9020:27017
     networks:
-      - org-project-db-mongo
+      - org-project
 
   org-project-mongo-express:
     container_name: org-project-mongo-express
@@ -27,4 +27,8 @@ services:
 #    ports:
 #      - 9030:8081
     networks:
-      - org-project-db-mongo
+      - org-project
+
+networks:
+  org-project:
+    name: org-project
