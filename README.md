@@ -6,7 +6,7 @@ Mongo DB with Mongo express over Raspberry running on Docker
 
 ## Steps
 ### 1. Clone the repository
-```
+```shell
 git clone https://github.com/sebastianaf/training-mongodb
 cd training-mongodb
 ```
@@ -17,6 +17,6 @@ Create a `.env` from `.env.example` file in the root folder with all environment
 It's recommend to change all the names (in `docker-compose.yml) named with `org` and `project` with your own organization name and project name.
 
 ### 4. Run
-```
+```shell
 docker compose -p org-project up -d
 ```
