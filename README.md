@@ -17,7 +17,7 @@ Create a `.env` from `.env.example` file in the root folder with all environment
 Uncomment the ports flag in `docker-compose.yml` to be able for access the services.
 
 ### 4. Change `org` and `project` names [Optional]
-It's recommend to change all the names (in `docker-compose.yml) named with `org` and `project` with your own organization name and project name.
+It's recommend to change all the names (in `docker-compose.yml`) named with `org` and `project` with your own organization name and project name.
 
 ### 5. Run
 ```shell
