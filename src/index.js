@@ -1,15 +1,15 @@
 import { MongoClient } from "mongodb";
 import { faker } from "@faker-js/faker";
+import mongoose from "mongoose";
 
 require("dotenv").config();
 const url = process.env.DB_MONGO_URL;
 
-(async () => {
+const mongoDriverTraining = async () => {
   try {
-    const client = new MongoClient(url)
-    const db = client.db("mydb")
+    const client = new MongoClient(url);
+    const db = client.db("mydb");
     const customers = db.collection("customers");
-    
 
     console.log(`Inserting 1000 customers...`);
     for (let index = 0; index < 1000; index++) {
@@ -21,23 +21,34 @@ const url = process.env.DB_MONGO_URL;
     }
     console.log(`Inserting 1000 customers... OK`);
 
+    console.log(`Finding names`);
+    const cursor = await customers.find({ name: /^[Aa]/ }, {});
+
+    await cursor.forEach((customer) => {
+      //console.log(customer);
+    });
+
     client.close();
   } catch (error) {
     console.log(error);
   }
-})();
+};
 
-/* const mongoose = require("mongoose");
+const mongooseTraining = async () => {
+  try {
+    mongoose.connect(url);
 
-require("dotenv").config();
-const url = process.env.DB_MONGO_URL;
+    const Cat = mongoose.model("Cat", { name: String });
 
-console.log(url);
+    const kitty = new Cat({ name: "Zildjian" });
+    const res = await kitty.save();
+    console.log(res);
 
-mongoose.connect(url);
+    mongoose.disconnect();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const Cat = mongoose.model("Cat", { name: String });
-
-const kitty = new Cat({ name: "Zildjian" });
-kitty.save().then(() => console.log("meow"));
- */
+//mongoDriverTraining();
+mongooseTraining();

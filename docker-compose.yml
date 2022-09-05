@@ -9,6 +9,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${DB_DATA_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_DATA_PASSWORD}
       MONGO_INITDB_DATABASE: ${DB_DATA_DATABASE}
+      TZ: ${TZ}
     volumes:
       - ./db-files:/data/db
     ports:
