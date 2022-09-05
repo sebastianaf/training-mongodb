@@ -6,13 +6,13 @@ services:
     image: mongo:4.4.15
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
-      MONGO_INITDB_DATABASE: ${DB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_DATA_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_DATA_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_DATA_DATABASE}
     volumes:
       - ./db-files:/data/db
     ports:
-      - 9021:27017
+      - ${DB_DATA_PORT}:27017
     networks:
       - training-mongo
 
@@ -21,11 +21,11 @@ services:
     image: mongo-express
     restart: always
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_DATA_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_DATA_PASSWORD}
       ME_CONFIG_MONGODB_URL: ${DB_MONGO_URL}
     ports:
-      - 9041:8081
+      - ${DB_MONGO_PORT}:8081
     networks:
       - training-mongo
 
