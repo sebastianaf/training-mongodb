@@ -1,0 +1,26 @@
+{
+  "name": "training-mongodb",
+  "version": "1.0.0",
+  "description": "Training code with MongoDB Mongoose, Mongo express running on Docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastianaf/training-mongodb.git"
+  },
+  "keywords": [
+    "mongodb"
+  ],
+  "author": "sebastianaf",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sebastianaf/training-mongodb/issues"
+  },
+  "homepage": "https://github.com/sebastianaf/training-mongodb#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "mongoose": "^6.5.4"
+  }
+}

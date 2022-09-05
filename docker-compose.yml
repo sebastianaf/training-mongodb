@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  org-project-db-mongo:
-    container_name: org-project-db-mongo
+  training-mongo-db-mongo:
+    container_name: training-mongo-db-mongo
     image: mongo:4.4.15
     restart: always
     environment:
@@ -11,24 +11,24 @@ services:
       MONGO_INITDB_DATABASE: ${DB_DATABASE}
     volumes:
       - ./db-files:/data/db
-#    ports:
-#      - 9020:27017
+    ports:
+      - 9021:27017
     networks:
-      - org-project
+      - training-mongo
 
-  org-project-mongo-express:
-    container_name: org-project-mongo-express
+  training-mongo-mongo-express:
+    container_name: training-mongo-mongo-express
     image: mongo-express
     restart: always
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
       ME_CONFIG_MONGODB_URL: ${DB_MONGO_URL}
-#    ports:
-#      - 9030:8081
+    ports:
+      - 9041:8081
     networks:
-      - org-project
+      - training-mongo
 
 networks:
-  org-project:
-    name: org-project
+  training-mongo:
+    name: training-mongo
