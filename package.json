@@ -21,6 +21,7 @@
   "homepage": "https://github.com/sebastianaf/training-mongodb#readme",
   "dependencies": {
     "dotenv": "^16.0.2",
+    "mongodb": "^4.9.1",
     "mongoose": "^6.5.4"
   }
 }
