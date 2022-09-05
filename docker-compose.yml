@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  training-mongo-db-mongo:
-    container_name: training-mongo-db-mongo
-    image: mongo:4.4.15
+  training-mongodb-db:
+    container_name: training-mongodb-db
+    image: mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_DATA_USER}
@@ -14,21 +14,23 @@ services:
     ports:
       - ${DB_DATA_PORT}:27017
     networks:
-      - training-mongo
+      - training-mongodb
 
-  training-mongo-mongo-express:
-    container_name: training-mongo-mongo-express
+  training-mongodb-mongoexpress:
+    container_name: training-mongodb-mongoexpress
     image: mongo-express
     restart: always
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_DATA_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_DATA_PASSWORD}
       ME_CONFIG_MONGODB_URL: ${DB_MONGO_URL}
+    depends_on:
+      - training-mongodb-db
     ports:
       - ${DB_MONGO_PORT}:8081
     networks:
-      - training-mongo
+      - training-mongodb
 
 networks:
-  training-mongo:
-    name: training-mongo
+  training-mongodb:
+    name: training-mongodb
