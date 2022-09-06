@@ -5,11 +5,12 @@ const { Schema } = mongoose;
 
 require("dotenv").config();
 const url = process.env.DB_MONGO_URL;
+const database = process.env.DB_DATA_DATABASE;
 
 const mongoDriverTraining = async () => {
   try {
     const client = new MongoClient(url);
-    const db = client.db("mydb");
+    const db = client.db(database);
     const customers = db.collection("customers");
 
     console.log(`Inserting 1000 customers...`);
@@ -57,7 +58,7 @@ const mongooseTraining = async () => {
 
     const Customer = mongoose.model("Customer", CustomerSchema);
 
-    mongoose.connect(url);
+    mongoose.connect(url, { dbName: database });
 
     for (let index = 0; index < 1000; index++) {
       const customer = new Customer({
@@ -73,7 +74,7 @@ const mongooseTraining = async () => {
     }
 
     const query = await Customer.find({ name: /^[Aa]/ });
-    console.log(query)
+    console.log(query);
 
     mongoose.disconnect();
   } catch (error) {
@@ -81,5 +82,5 @@ const mongooseTraining = async () => {
   }
 };
 
-mongoDriverTraining();
-//mongooseTraining();
+//mongoDriverTraining();
+mongooseTraining();
