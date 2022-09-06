@@ -58,10 +58,12 @@ const mongooseTraining = async () => {
 
     const Customer = mongoose.model("Customer", CustomerSchema);
 
-    mongoose.connect(url, { dbName: database });
+    const connection = mongoose.createConnection(url, { dbName: database });
+
+    const CustomerModel = connection.model("Customer", CustomerSchema);
 
     for (let index = 0; index < 1000; index++) {
-      const customer = new Customer({
+      const customer = new CustomerModel({
         name: faker.name.firstName(),
         lastname: faker.name.lastName(),
         address: faker.address.streetAddress(),
@@ -73,10 +75,10 @@ const mongooseTraining = async () => {
       await customer.save();
     }
 
-    const query = await Customer.find({ name: /^[Aa]/ });
+    const query = await CustomerModel.find({ name: /^[Aa]/ });
     console.log(query);
 
-    mongoose.disconnect();
+    connection.close();
   } catch (error) {
     console.log(error);
   }
